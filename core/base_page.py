@@ -1,5 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage:
     def __init__(self, driver):
@@ -30,3 +33,8 @@ class BasePage:
         if element:
             return element.text
         return ""
+
+    def hover_element(self, locator):
+        element = self.find_element(locator)
+        if element:
+            ActionChains(self.driver).move_to_element(element).perform()
